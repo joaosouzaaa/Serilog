@@ -27,7 +27,8 @@ public sealed class HouseRepository : BaseRepository<House>, IHouseRepository
     }
 
     public Task<bool> ExistsAsync(int id) =>
-        DbContextSet.AsNoTracking().AnyAsync(h => h.Id == id);
+        DbContextSet.AsNoTracking()
+                    .AnyAsync(h => h.Id == id);
 
     public async Task DeleteAsync(int id)
     {
@@ -39,5 +40,6 @@ public sealed class HouseRepository : BaseRepository<House>, IHouseRepository
     }
 
     public Task<List<House>> GetByOwnerIdAsync(int ownerId) =>
-        DbContextSet.Where(h => h.OwnerId == ownerId).ToListAsync();
+        DbContextSet.Where(h => h.OwnerId == ownerId)
+                    .ToListAsync();
 }

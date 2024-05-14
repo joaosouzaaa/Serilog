@@ -51,5 +51,6 @@ public sealed class PersonRepository : BaseRepository<Person>, IPersonRepository
     }
 
     public Task<List<Person>> GetAllAsync() =>
-        DbContextSet.AsNoTracking().ToListAsync();
+        DbContextSet.AsNoTracking()
+                    .ToListAsync();
 }

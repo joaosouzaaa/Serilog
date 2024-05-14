@@ -9,5 +9,6 @@ internal static class RepositoriesDependencyInjection
     {
         services.AddScoped<IHouseRepository, HouseRepository>();
         services.AddScoped<IPersonRepository, PersonRepository>();
+        services.AddScoped<IRentalDateRepository, RentalDateRepository>();
     }
 }
