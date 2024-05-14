@@ -18,5 +18,6 @@ internal static class DependencyInjectionHandler
         });
 
         services.AddSettingsDependencyInjection();
+        services.AddRepositoriesDependencyInjection();
     }
 }
