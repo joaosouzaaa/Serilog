@@ -1,3 +1,4 @@
+using SerilogAPI.Constants;
 using SerilogAPI.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(CorsNamesConstants.CorsPolicy);
+app.MigrateDatabase();
 app.UseAuthorization();
 app.MapControllers();
 
