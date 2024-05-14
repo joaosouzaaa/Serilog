@@ -7,6 +7,7 @@ public sealed class RentalDate
     public required DateTime EndTime { get; set; }
 
     public required int HouseId { get; set; }
+    public House House { get; set; }
     public required int RenterId { get; set; }
     public Person Renter { get; set; }
 }
