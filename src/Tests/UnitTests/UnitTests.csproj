@@ -10,6 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Bogus" Version="35.5.1" />
 		<PackageReference Include="coverlet.collector" Version="6.0.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -31,6 +32,10 @@
 	  <Folder Include="ValidatorsTests\" />
 	  <Folder Include="TestBuilders\" />
 	  <Folder Include="ServicesTests\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\SerilogAPI\SerilogAPI.csproj" />
 	</ItemGroup>
 
 </Project>
