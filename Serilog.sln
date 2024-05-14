@@ -3,9 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC3DD004-533C-4C71-B9DF-EA805B5E6EF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3670D97A-AD0A-4528-B060-0753D51A366B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "src\Tests\UnitTests\UnitTests.csproj", "{F3E8ACD7-38C0-4E92-A92F-A8B8D4CF9FD8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerilogAPI", "src\SerilogAPI\SerilogAPI.csproj", "{37ED62D2-BBB8-4EF3-9851-950DF9C053EF}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3E8ACD7-38C0-4E92-A92F-A8B8D4CF9FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E8ACD7-38C0-4E92-A92F-A8B8D4CF9FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E8ACD7-38C0-4E92-A92F-A8B8D4CF9FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E8ACD7-38C0-4E92-A92F-A8B8D4CF9FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37ED62D2-BBB8-4EF3-9851-950DF9C053EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37ED62D2-BBB8-4EF3-9851-950DF9C053EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37ED62D2-BBB8-4EF3-9851-950DF9C053EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37ED62D2-BBB8-4EF3-9851-950DF9C053EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3670D97A-AD0A-4528-B060-0753D51A366B} = {CC3DD004-533C-4C71-B9DF-EA805B5E6EF1}
+		{F3E8ACD7-38C0-4E92-A92F-A8B8D4CF9FD8} = {3670D97A-AD0A-4528-B060-0753D51A366B}
+		{37ED62D2-BBB8-4EF3-9851-950DF9C053EF} = {CC3DD004-533C-4C71-B9DF-EA805B5E6EF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E2DA2B2-280F-4E47-B732-867F9884EFCF}
