@@ -29,7 +29,6 @@
 
 	<ItemGroup>
 	  <Folder Include="MappersTests\" />
-	  <Folder Include="ValidatorsTests\" />
 	  <Folder Include="ServicesTests\" />
 	</ItemGroup>
 
