@@ -25,6 +25,11 @@ public sealed class PersonBuilder
         new(_name,
             _age);
 
+    public PersonUpdate UpdateBuild() =>
+        new(_id,
+            _name,
+            _age);
+
     public PersonBuilder WithAge(int age)
     {
         _age = age;
