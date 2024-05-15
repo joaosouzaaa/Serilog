@@ -30,6 +30,11 @@ public sealed class PersonBuilder
             _name,
             _age);
 
+    public PersonResponse ResponseBuild() =>
+        new(_id,
+            _name,
+            _age);
+
     public PersonBuilder WithAge(int age)
     {
         _age = age;
