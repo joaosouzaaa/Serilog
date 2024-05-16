@@ -16,7 +16,6 @@ public sealed class PersonBuilder
         new()
         {
             Age = _age,
-            Houses = [],
             Id = _id,
             Name = _name
         };
