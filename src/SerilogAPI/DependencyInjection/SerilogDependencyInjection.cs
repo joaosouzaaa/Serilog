@@ -11,11 +11,11 @@ internal static class SerilogDependencyInjection
             loggerConfiguration.ReadFrom.Configuration(configuration));
 
         //services.AddSerilog(loggerConfiguration =>
-        //    new LoggerConfiguration()
-        //        .MinimumLevel.Debug()
+        //    loggerConfiguration
+        //        .MinimumLevel.Information()
         //        .WriteTo.Console()
         //        .WriteTo.File(
-        //            configuration["Serilog:WriteTo:Args:path"]!,
+        //            configuration["Serilog:WriteTo:1:Args:path"]!,
         //            rollingInterval: RollingInterval.Day,
         //            rollOnFileSizeLimit: true)
         //        .Enrich.WithThreadId()
