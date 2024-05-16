@@ -1,6 +1,8 @@
-﻿using SerilogAPI.Filters;
+﻿using FluentValidation;
+using SerilogAPI.Filters;
 using SerilogAPI.Interfaces.Settings;
 using SerilogAPI.Settings.NotificationSettings;
+using System.Reflection;
 
 namespace SerilogAPI.DependencyInjection;
 
@@ -13,5 +15,7 @@ internal static class SettingsDependencyInjection
         services.AddScoped<NotificationFilter>();
 
         services.AddMvc(options => options.Filters.AddService<NotificationFilter>());
+
+        services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly());
     }
 }

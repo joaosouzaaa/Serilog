@@ -19,5 +19,7 @@ internal static class DependencyInjectionHandler
 
         services.AddSettingsDependencyInjection();
         services.AddRepositoriesDependencyInjection();
+        services.AddMappersDependencyInjection();
+        services.AddServicesDependencyInjection();
     }
 }

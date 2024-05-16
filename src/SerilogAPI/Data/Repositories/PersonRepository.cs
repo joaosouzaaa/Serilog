@@ -1,56 +1,63 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SerilogAPI.Data.DatabaseContexts;
-using SerilogAPI.Data.Repositories.BaseRepositories;
 using SerilogAPI.Entities;
 using SerilogAPI.Interfaces.Repositories;
 
 namespace SerilogAPI.Data.Repositories;
 
-public sealed class PersonRepository : BaseRepository<Person>, IPersonRepository
+public sealed class PersonRepository(
+    AppDbContext dbContext) 
+    : IPersonRepository, 
+    IDisposable
 {
-    public PersonRepository(AppDbContext dbContext) : base(dbContext)
-    {
-    }
+    private DbSet<Person> PersonDbContextSet => dbContext.Set<Person>();
 
     public Task AddAsync(Person person)
     {
-        DbContextSet.Add(person);
+        PersonDbContextSet.Add(person);
 
-        return _dbContext.SaveChangesAsync();
+        return dbContext.SaveChangesAsync();
     }
 
     public Task UpdateAsync(Person person)
     {
-        _dbContext.Entry(person).State = EntityState.Modified;
+        dbContext.Entry(person).State = EntityState.Modified;
 
-        return _dbContext.SaveChangesAsync();
+        return dbContext.SaveChangesAsync();
     }
 
-    public Task ExistsAsync(int id) =>
-        DbContextSet.AnyAsync(p => p.Id == id);
+    public Task<bool> ExistsAsync(int id) =>
+        PersonDbContextSet.AnyAsync(p => p.Id == id);
 
     public async Task DeleteAsync(int id)
     {
-        var person = await DbContextSet.FirstOrDefaultAsync(p => p.Id == id);
+        var person = await PersonDbContextSet.FirstOrDefaultAsync(p => p.Id == id);
 
-        DbContextSet.Remove(person!);
+        PersonDbContextSet.Remove(person!);
 
-        await _dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync();
     }
 
     public Task<Person?> GetByIdAsync(int id, bool asNoTracking)
     {
-        var query = (IQueryable<Person>)DbContextSet;
+        var query = (IQueryable<Person>)PersonDbContextSet;
 
         if (asNoTracking)
         {
-            query = DbContextSet.AsNoTracking();
+            query = PersonDbContextSet.AsNoTracking();
         }
 
         return query.FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public Task<List<Person>> GetAllAsync() =>
-        DbContextSet.AsNoTracking()
+        PersonDbContextSet.AsNoTracking()
                     .ToListAsync();
+
+    public void Dispose()
+    {
+        dbContext.Dispose();
+
+        GC.SuppressFinalize(this);
+    }
 }
