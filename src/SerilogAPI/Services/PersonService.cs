@@ -11,24 +11,24 @@ using SerilogAPI.Interfaces.Settings;
 namespace SerilogAPI.Services;
 
 public sealed class PersonService(
-    IPersonRepository personRepository, 
+    IPersonRepository personRepository,
     IPersonMapper personMapper,
     IValidator<Person> validator,
     INotificationHandler notificationHandler,
-    ILogger<PersonService> logger) 
+    ILogger<PersonService> logger)
     : IPersonService
 {
     public async Task AddAsync(PersonSave personSave)
     {
         var person = personMapper.SaveToDomain(personSave);
-        
-        if(await IsValidAsync(person))
+
+        if (!await IsValidAsync(person))
         {
             logger.LogError(ELogs.Invalid.Description().FormatTo("Person"));
 
             return;
         }
-        
+
         await personRepository.AddAsync(person);
 
         logger.LogInformation("Person was inserted successfully");
@@ -38,8 +38,10 @@ public sealed class PersonService(
     {
         var person = await personRepository.GetByIdAsync(personUpdate.Id, false);
 
-        if(person is null)
+        if (person is null)
         {
+            notificationHandler.AddNotification(nameof(ELogs.NotFound), ELogs.NotFound.Description().FormatTo("Person"));
+
             logger.LogError(ELogs.NotFound.Description().FormatTo($"Person: {personUpdate.Id}"));
 
             return;
@@ -47,7 +49,7 @@ public sealed class PersonService(
 
         personMapper.UpdateToDomain(personUpdate, person);
 
-        if(!await IsValidAsync(person))
+        if (!await IsValidAsync(person))
         {
             logger.LogError(ELogs.Invalid.Description().FormatTo("Person"));
 
@@ -61,8 +63,10 @@ public sealed class PersonService(
 
     public async Task DeleteAsync(int id)
     {
-        if(!await personRepository.ExistsAsync(id)) 
+        if (!await personRepository.ExistsAsync(id))
         {
+            notificationHandler.AddNotification(nameof(ELogs.NotFound), ELogs.NotFound.Description().FormatTo("Person"));
+
             logger.LogError(ELogs.NotFound.Description().FormatTo($"Person: {id}"));
 
             return;
@@ -93,6 +97,8 @@ public sealed class PersonService(
     {
         var personList = await personRepository.GetAllAsync();
 
+        logger.LogInformation("Person list found with {@personList.Count} records", personList.Count);
+
         return personMapper.DomainListToResponseList(personList);
     }
 
@@ -105,7 +111,7 @@ public sealed class PersonService(
             return true;
         }
 
-        foreach(var error in  validationResult.Errors)
+        foreach (var error in validationResult.Errors)
         {
             notificationHandler.AddNotification(error.PropertyName, error.ErrorMessage);
 
