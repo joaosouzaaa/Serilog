@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpLogging;
 using SerilogAPI.Constants;
 using SerilogAPI.DependencyInjection;
 
@@ -8,6 +9,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDependencyInjection(configuration);
+builder.Services.AddHttpLogging(options => 
+{
+    options.LoggingFields = 
+        HttpLoggingFields.RequestBody |
+        HttpLoggingFields.RequestPath |
+        HttpLoggingFields.ResponseBody |
+        HttpLoggingFields.ResponseStatusCode;
+});
 
 var app = builder.Build();
 
@@ -22,5 +31,6 @@ app.UseCors(CorsNamesConstants.CorsPolicy);
 app.MigrateDatabase();
 app.UseAuthorization();
 app.MapControllers();
+app.UseHttpLogging();
 
 app.Run();
