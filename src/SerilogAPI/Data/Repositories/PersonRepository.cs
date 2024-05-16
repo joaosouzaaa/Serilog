@@ -26,7 +26,7 @@ public sealed class PersonRepository : BaseRepository<Person>, IPersonRepository
         return _dbContext.SaveChangesAsync();
     }
 
-    public Task ExistsAsync(int id) =>
+    public Task<bool> ExistsAsync(int id) =>
         DbContextSet.AnyAsync(p => p.Id == id);
 
     public async Task DeleteAsync(int id)
