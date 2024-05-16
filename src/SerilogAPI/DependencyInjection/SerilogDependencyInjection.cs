@@ -15,9 +15,10 @@ internal static class SerilogDependencyInjection
         //        .MinimumLevel.Information()
         //        .WriteTo.Console()
         //        .WriteTo.File(
-        //            configuration["Serilog:WriteTo:1:Args:path"]!,
+        //            path: configuration["Serilog:WriteTo:1:Args:path"]!,
         //            rollingInterval: RollingInterval.Day,
         //            rollOnFileSizeLimit: true)
+        //        .WriteTo.Seq(serverUrl: configuration["Serilog:WriteTo:2:Args:serverUrl"]!)
         //        .Enrich.WithThreadId()
         //        .Enrich.WithClientIp()
         //        .Enrich.WithCorrelationId()
