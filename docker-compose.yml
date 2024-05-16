@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:80
+
+  postgres:
+    image: postgres:latest
+    container_name: serilog
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: serilog
+
+  serilogapi:
+    image: ${DOCKER_REGISTRY-}serilogapi
+    container_name: serilog-api
+    ports:
+      - "5020:80"
+      - "5021:443"
+    build:
+      context: .
+      dockerfile: src/SerilogAPI/Dockerfile
+    depends_on:
+      - seq
+      - postgres
