@@ -4,7 +4,7 @@ using SerilogAPI.Interfaces.Settings;
 
 namespace SerilogAPI.Filters;
 
-internal sealed class NotificationFilter(INotificationHandler notificationHandler) : ActionFilterAttribute
+public sealed class NotificationFilter(INotificationHandler notificationHandler) : ActionFilterAttribute
 {
     public override void OnActionExecuted(ActionExecutedContext context)
     {

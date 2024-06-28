@@ -4,8 +4,7 @@ namespace SerilogAPI.DependencyInjection;
 
 internal static class CorsDependencyInjection
 {
-    internal static void AddCorsDependencyInjection(this IServiceCollection services)
-    {
+    internal static void AddCorsDependencyInjection(this IServiceCollection services) =>
         services.AddCors(p => p.AddPolicy(CorsNamesConstants.CorsPolicy, builder =>
         {
             builder.AllowAnyMethod()
@@ -13,5 +12,4 @@ internal static class CorsDependencyInjection
                    .SetIsOriginAllowed(origin => true)
                    .AllowCredentials();
         }));
-    }
 }
